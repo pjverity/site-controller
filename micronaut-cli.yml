@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: uk.co.vhome
+---
+testFramework: junit
+sourceLanguage: java

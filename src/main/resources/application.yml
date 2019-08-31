@@ -1,0 +1,25 @@
+micronaut:
+  application:
+    name: site-controller
+---
+datasources:
+  default:
+    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE}?timezone=UTC
+    driverClassName: org.postgresql.Driver
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    dialect: POSTGRES
+    schema: enquiry_handler
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        bytecode:
+          provider: none
+        hbm2ddl:
+          auto: update
+
+jackson:
+  serialization:
+    WRITE_DATES_AS_TIMESTAMPS: false

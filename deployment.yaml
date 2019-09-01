@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: site-controller
+    instance: caterhamladiesjoggers
+  name: caterham-ladies-joggers-site-controller
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: site-controller
+      instance: caterhamladiesjoggers
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: site-controller
+        instance: caterhamladiesjoggers
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_HOST
+              value: postgres
+            - name: DATABASE_PORT
+              value: '5432'
+            - name: DATABASE
+              value: caterhamladiesjoggers
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: postgres-credentials
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: postgres-credentials
+          image: gcr.io/clubbed-197021/site-controller:latest
+          imagePullPolicy: IfNotPresent
+          name: caterham-ladies-joggers-site-controller
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 5m
+              memory: 16Mi
+            limits:
+              cpu: 10m
+              memory: 64Mi
+      restartPolicy: Always
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "caterham-ladies-joggers-site-controller-service"
+  namespace: "default"
+  labels:
+    app: "site-controller"
+    instance: "caterhamladiesjoggers"
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 8080
+  selector:
+    app: "site-controller"
+    instance: "caterhamladiesjoggers"
+  type: "ClusterIP"

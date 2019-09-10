@@ -3,15 +3,13 @@ kind: Deployment
 metadata:
   labels:
     app: site-controller
-    instance: caterhamladiesjoggers
-  name: caterham-ladies-joggers-site-controller
+  name: site-controller
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: site-controller
-      instance: caterhamladiesjoggers
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -21,26 +19,25 @@ spec:
     metadata:
       labels:
         app: site-controller
-        instance: caterhamladiesjoggers
     spec:
       containers:
         - env:
-            - name: DATABASE_HOST
-              value: postgres
-            - name: DATABASE_PORT
-              value: '5432'
-            - name: DATABASE
-              value: caterhamladiesjoggers
-            - name: DATABASE_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: username
-                  name: postgres-credentials
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: password
-                  name: postgres-credentials
+          - name: JAVA_OPTS
+            value: -XX:MaxRAMPercentage=80
+          - name: DATABASE_HOST
+            value: postgres
+          - name: DATABASE_PORT
+            value: '5432'
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: postgres-credentials
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: postgres-credentials
           image: gcr.io/clubbed-197021/site-controller:latest
           imagePullPolicy: IfNotPresent
           name: caterham-ladies-joggers-site-controller
@@ -48,27 +45,24 @@ spec:
             - containerPort: 8080
               protocol: TCP
           resources:
-            requests:
-              cpu: 5m
-              memory: 16Mi
             limits:
               cpu: 10m
-              memory: 64Mi
+              memory: 200Mi
+            requests:
+              cpu: 5m
+              memory: 180Mi
       restartPolicy: Always
 ---
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "caterham-ladies-joggers-site-controller-service"
-  namespace: "default"
+  name: site-controller-service
   labels:
-    app: "site-controller"
-    instance: "caterhamladiesjoggers"
+    app: site-controller
 spec:
   ports:
-    - protocol: "TCP"
+    - protocol: TCP
       port: 8080
   selector:
-    app: "site-controller"
-    instance: "caterhamladiesjoggers"
-  type: "ClusterIP"
+    app: site-controller
+  type: ClusterIP

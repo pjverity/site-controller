@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: site-controller
+  name: site-controller
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: site-controller
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: site-controller
+    spec:
+      containers:
+        - env:
+          - name: JAVA_OPTS
+            value: -XX:MaxRAMPercentage=80
+          - name: DATABASE_HOST
+            value: postgres
+          - name: DATABASE_PORT
+            value: '5432'
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: postgres-credentials
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: postgres-credentials
+          image: gcr.io/clubbed-197021/site-controller:latest
+          imagePullPolicy: IfNotPresent
+          name: site-controller
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 150m
+              memory: 200Mi
+            requests:
+              cpu: 3m
+              memory: 180Mi
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: site-controller-service
+  labels:
+    app: site-controller
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+  selector:
+    app: site-controller
+  type: ClusterIP

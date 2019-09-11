@@ -2,9 +2,10 @@ package uk.co.vhome.sitecontroller;
 
 import io.micronaut.runtime.Micronaut;
 
-public class Application {
+public class SiteControllerApplication
+{
 
     public static void main(String[] args) {
-        Micronaut.run(Application.class);
+        Micronaut.run(SiteControllerApplication.class);
     }
 }

@@ -4,15 +4,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.vhome</groupId>
 	<artifactId>site-controller</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<properties>
-		<micronaut.version>1.2.0</micronaut.version>
+		<micronaut.version>1.2.1</micronaut.version>
 		<jdk.version>12</jdk.version>
 		<maven.compiler.target>${jdk.version}</maven.compiler.target>
 		<maven.compiler.source>${jdk.version}</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<exec.mainClass>uk.co.vhome.sitecontroller.Application</exec.mainClass>
+		<exec.mainClass>uk.co.vhome.sitecontroller.SiteControllerApplication</exec.mainClass>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 	</properties>
@@ -34,12 +34,6 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.8</version>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>io.micronaut</groupId>
 			<artifactId>micronaut-inject</artifactId>
@@ -149,7 +143,7 @@
 			<plugin>
 				<groupId>com.amashchenko.maven.plugin</groupId>
 				<artifactId>gitflow-maven-plugin</artifactId>
-				<version>1.12.0</version>
+				<version>1.13.0</version>
 				<configuration>
 					<commitMessages>
 						<featureStartMessage>[gitflow-maven-plugin] Updated feature branch to version @{version}</featureStartMessage>
@@ -196,17 +190,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.7.0</version>
+					<version>3.8.1</version>
 					<configuration>
 						<compilerArgs>
 							<arg>-parameters</arg>
 						</compilerArgs>
 						<annotationProcessorPaths>
-							<path>
-								<groupId>org.projectlombok</groupId>
-								<artifactId>lombok</artifactId>
-								<version>1.18.0</version>
-							</path>
 							<path>
 								<groupId>io.micronaut</groupId>
 								<artifactId>micronaut-inject-java</artifactId>

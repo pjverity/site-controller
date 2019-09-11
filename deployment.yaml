@@ -40,16 +40,16 @@ spec:
                 name: postgres-credentials
           image: gcr.io/clubbed-197021/site-controller:latest
           imagePullPolicy: IfNotPresent
-          name: caterham-ladies-joggers-site-controller
+          name: site-controller
           ports:
             - containerPort: 8080
               protocol: TCP
           resources:
             limits:
-              cpu: 10m
+              cpu: 150m
               memory: 200Mi
             requests:
-              cpu: 5m
+              cpu: 3m
               memory: 180Mi
       restartPolicy: Always
 ---

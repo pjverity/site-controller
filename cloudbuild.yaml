@@ -7,12 +7,11 @@ steps:
     args: ['push', 'gcr.io/${PROJECT_ID}/site-controller:${TAG_NAME}']
   - name: 'gcr.io/cloud-builders/kubectl'
     args:
-      - 'set'
-      - 'image'
-      - 'deployment'
-      - '-l'
-      - 'app=site-controller'
-      - '*=gcr.io/${PROJECT_ID}/site-controller:${TAG_NAME}'
+      - set
+      - image
+      - deployment
+      - site-controller
+      - site-controller=gcr.io/${PROJECT_ID}/site-controller:${TAG_NAME}
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=${_COMPUTE_ZONE}'
       - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'

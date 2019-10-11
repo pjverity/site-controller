@@ -1,10 +1,29 @@
 micronaut:
   application:
     name: site-controller
+#  server:
+#    port: 8081
   executors:
     scheduled:
       type: scheduled
       core-pool-size: 1
+
+  views:
+#    enabled: false
+    folder: templates
+    freemarker:
+      enabled: false
+
+mail:
+  smtp:
+    host: server.v-home.co.uk
+    localhost: server.v-home.co.uk
+    port: 587
+    auth:
+      mechanisms: DIGEST-MD5
+    starttls:
+      enable: true
+      required: true
 
 datasources:
   default:

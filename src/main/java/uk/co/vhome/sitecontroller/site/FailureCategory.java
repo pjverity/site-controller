@@ -1,0 +1,24 @@
+package uk.co.vhome.sitecontroller.site;
+
+@SuppressWarnings("unused")
+public enum FailureCategory
+{
+	UNSPECIFIED,
+	RESERVED_1,
+	RESERVED_2,
+	RESERVED_3,
+	RESERVED_4,
+	RESERVED_5,
+	RESERVED_6,
+	RESERVED_7,
+	RESERVED_8,
+	RESERVED_9,
+	RESERVED_10,
+	RESERVED_11,
+	RESERVED_12,
+	RESERVED_13,
+	RESERVED_14,
+	RESERVED_15,
+	MAIL_DELIVERY
+
+}

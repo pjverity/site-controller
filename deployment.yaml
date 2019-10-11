@@ -38,6 +38,16 @@ spec:
               secretKeyRef:
                 key: password
                 name: postgres-credentials
+          - name: MAIL_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: mail-credentials
+          - name: MAIL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: mail-credentials
           image: gcr.io/clubbed-197021/site-controller:latest
           imagePullPolicy: IfNotPresent
           name: site-controller
@@ -47,7 +57,7 @@ spec:
           resources:
             limits:
               cpu: 150m
-              memory: 200Mi
+              memory: 250Mi
             requests:
               cpu: 3m
               memory: 180Mi

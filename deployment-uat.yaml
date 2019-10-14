@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: site-controller
+    env: uat
+  name: uat-site-controller
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: site-controller
+      env: uat
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: site-controller
+        env: uat
+    spec:
+      containers:
+        - env:
+          - name: JAVA_OPTS
+            value: -XX:MaxRAMPercentage=80
+          - name: DATABASE_HOST
+            value: postgres
+          - name: DATABASE_PORT
+            value: '5432'
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: postgres-credentials
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: postgres-credentials
+          - name: MAIL_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: mail-credentials
+          - name: MAIL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: mail-credentials
+          image: gcr.io/clubbed-197021/site-controller:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: site-controller
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 150m
+              memory: 250Mi
+            requests:
+              cpu: 3m
+              memory: 180Mi
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uat-site-controller-service
+  labels:
+    app: site-controller
+    env: uat
+spec:
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 8080
+  selector:
+    app: site-controller
+    env: uat
+  type: ClusterIP

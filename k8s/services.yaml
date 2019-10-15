@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: site-controller-service-a
+  labels:
+    app: site-controller
+    service: A
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+  selector:
+    app: site-controller
+    deployment: blue
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: site-controller-service-b
+  labels:
+    app: site-controller
+    service: B
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+  selector:
+    app: site-controller
+    deployment: green
+  type: ClusterIP

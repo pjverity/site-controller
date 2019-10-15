@@ -3,13 +3,15 @@ kind: Deployment
 metadata:
   labels:
     app: site-controller
-  name: site-controller
+    deployment: blue
+  name: blue-site-controller
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: site-controller
+      deployment: blue
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -19,6 +21,7 @@ spec:
     metadata:
       labels:
         app: site-controller
+        deployment: blue
     spec:
       containers:
         - env:
@@ -48,7 +51,7 @@ spec:
               secretKeyRef:
                 key: password
                 name: mail-credentials
-          image: gcr.io/clubbed-197021/site-controller:latest
+          image: gcr.io/clubbed-197021/site-controller:1.1.0
           imagePullPolicy: IfNotPresent
           name: site-controller
           ports:
@@ -62,17 +65,3 @@ spec:
               cpu: 3m
               memory: 180Mi
       restartPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: site-controller-service
-  labels:
-    app: site-controller
-spec:
-  ports:
-    - protocol: TCP
-      port: 8080
-  selector:
-    app: site-controller
-  type: ClusterIP

@@ -1,0 +1,5 @@
+datasources:
+  default:
+    url: jdbc:postgresql://postgres/caterhamladiesjoggers?timezone=UTC
+  reigatejuniorjoggers:
+    url: jdbc:postgresql://postgres/reigatejuniorjoggers?timezone=UTC

@@ -1,31 +1,30 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: site-controller-service-a
+  name: site-controller-service
   labels:
     app: site-controller
-    service: A
+    deployment: prod
 spec:
   ports:
     - protocol: TCP
       port: 8080
   selector:
     app: site-controller
-    deployment: blue
-  type: ClusterIP
+    env: prod
+    deployment: green
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: site-controller-service-b
+  name: uat-site-controller-service
   labels:
     app: site-controller
-    service: B
+    env: uat
 spec:
   ports:
     - protocol: TCP
       port: 8080
   selector:
     app: site-controller
-    deployment: green
-  type: ClusterIP
+    env: uat

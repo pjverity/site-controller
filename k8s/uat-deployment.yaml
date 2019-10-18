@@ -3,17 +3,15 @@ kind: Deployment
 metadata:
   labels:
     app: site-controller
-    env: prod
-    deployment: blue
-  name: blue-site-controller
+    env: uat
+  name: uat-site-controller
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: site-controller
-      env: prod
-      deployment: blue
+      env: uat
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -23,15 +21,14 @@ spec:
     metadata:
       labels:
         app: site-controller
-        env: prod
-        deployment: blue
+        env: uat
     spec:
       containers:
         - env:
           - name: JAVA_OPTS
             value: -XX:MaxRAMPercentage=80
           - name: DATABASE_SERVICE
-            value: postgres
+            value: uat-postgres
           - name: DATABASE_USERNAME
             valueFrom:
               secretKeyRef:
@@ -52,8 +49,8 @@ spec:
               secretKeyRef:
                 key: password
                 name: mail-credentials
-          image: gcr.io/clubbed-197021/site-controller:1.1.0
-          imagePullPolicy: IfNotPresent
+          image: gcr.io/clubbed-197021/site-controller:latest
+          imagePullPolicy: Always
           name: site-controller
           ports:
             - containerPort: 8080

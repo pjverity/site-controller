@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.vhome</groupId>
 	<artifactId>site-controller</artifactId>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<properties>
 		<micronaut.version>1.2.3</micronaut.version>
 		<jdk.version>12</jdk.version>

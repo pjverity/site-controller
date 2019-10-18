@@ -52,7 +52,7 @@ spec:
               secretKeyRef:
                 key: password
                 name: mail-credentials
-          image: gcr.io/clubbed-197021/site-controller:1.1.0
+          image: gcr.io/clubbed-197021/site-controller:1.1.1
           imagePullPolicy: IfNotPresent
           name: site-controller
           ports:

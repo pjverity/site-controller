@@ -3,13 +3,17 @@ kind: Deployment
 metadata:
   labels:
     app: site-controller
-  name: site-controller
+    env: prod
+    deployment: blue
+  name: blue-site-controller
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: site-controller
+      env: prod
+      deployment: blue
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -19,15 +23,15 @@ spec:
     metadata:
       labels:
         app: site-controller
+        env: prod
+        deployment: blue
     spec:
       containers:
         - env:
           - name: JAVA_OPTS
             value: -XX:MaxRAMPercentage=80
-          - name: DATABASE_HOST
+          - name: DATABASE_SERVICE
             value: postgres
-          - name: DATABASE_PORT
-            value: '5432'
           - name: DATABASE_USERNAME
             valueFrom:
               secretKeyRef:
@@ -48,7 +52,7 @@ spec:
               secretKeyRef:
                 key: password
                 name: mail-credentials
-          image: gcr.io/clubbed-197021/site-controller:latest
+          image: gcr.io/clubbed-197021/site-controller:1.1.1
           imagePullPolicy: IfNotPresent
           name: site-controller
           ports:
@@ -62,17 +66,3 @@ spec:
               cpu: 3m
               memory: 180Mi
       restartPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: site-controller-service
-  labels:
-    app: site-controller
-spec:
-  ports:
-    - protocol: TCP
-      port: 8080
-  selector:
-    app: site-controller
-  type: ClusterIP

@@ -17,14 +17,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: uat-site-controller-service
+  name: site-controller-service
   labels:
     app: site-controller
-    env: uat
+  namespace: uat
 spec:
   ports:
     - protocol: TCP
       port: 8080
   selector:
     app: site-controller
-    env: uat

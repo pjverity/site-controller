@@ -2,8 +2,8 @@ package uk.co.vhome.sitecontroller.schedules.clj;
 
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
-import io.micronaut.spring.tx.annotation.Transactional;
 import io.reactivex.SingleEmitter;
+import org.springframework.transaction.annotation.Transactional;
 import uk.co.vhome.sitecontroller.schedules.AbstractScheduleController;
 import uk.co.vhome.sitecontroller.schedules.Schedule;
 

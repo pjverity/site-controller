@@ -6,8 +6,8 @@
 	<artifactId>site-controller</artifactId>
 	<version>1.2.1</version>
 	<properties>
-		<micronaut.version>1.2.3</micronaut.version>
-		<jdk.version>12</jdk.version>
+		<micronaut.version>1.2.5</micronaut.version>
+		<jdk.version>13</jdk.version>
 		<maven.compiler.target>${jdk.version}</maven.compiler.target>
 		<maven.compiler.source>${jdk.version}</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +15,7 @@
 		<exec.mainClass>uk.co.vhome.sitecontroller.SiteControllerApplication</exec.mainClass>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-		<micronaut-data.version>1.0.0.M2</micronaut-data.version>
+		<micronaut-data.version>1.0.0.M3</micronaut-data.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -68,6 +68,11 @@
 			<groupId>io.micronaut</groupId>
 			<artifactId>micronaut-http-client</artifactId>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.micronaut.data</groupId>
+			<artifactId>micronaut-data-spring</artifactId>
+			<version>${micronaut-data.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.micronaut.data</groupId>

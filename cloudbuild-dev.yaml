@@ -10,8 +10,8 @@ steps:
       - set
       - image
       - deployment/site-controller
-      - site-controller=gcr.io/${PROJECT_ID}/site-controller:${TAG_NAME}
-      - --namespace
+      - site-controller=gcr.io/${PROJECT_ID}/site-controller:latest
+      - '--namespace'
       - uat
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=${_COMPUTE_ZONE}'

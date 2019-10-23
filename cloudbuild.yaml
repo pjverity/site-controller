@@ -9,8 +9,7 @@ steps:
     args:
       - set
       - image
-      - deployment
-      - site-controller
+      - deployment/${_GREEN_OR_BLUE}-site-controller
       - site-controller=gcr.io/${PROJECT_ID}/site-controller:${TAG_NAME}
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=${_COMPUTE_ZONE}'

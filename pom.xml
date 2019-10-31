@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.vhome</groupId>
 	<artifactId>site-controller</artifactId>
-	<version>1.2.2</version>
+	<version>1.2.3</version>
 	<properties>
 		<micronaut.version>1.2.5</micronaut.version>
 		<jdk.version>13</jdk.version>
@@ -15,7 +15,7 @@
 		<exec.mainClass>uk.co.vhome.sitecontroller.SiteControllerApplication</exec.mainClass>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-		<micronaut-data.version>1.0.0.M3</micronaut-data.version>
+		<micronaut-data.version>1.0.0.M4</micronaut-data.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -75,9 +75,19 @@
 			<version>${micronaut-data.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>5.2.0.RELEASE</version>
+		</dependency>
+		<dependency>
 			<groupId>io.micronaut.data</groupId>
 			<artifactId>micronaut-data-hibernate-jpa</artifactId>
 			<version>${micronaut-data.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.micronaut.configuration</groupId>
+			<artifactId>micronaut-hibernate-jpa</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.micronaut.configuration</groupId>

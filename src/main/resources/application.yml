@@ -32,14 +32,14 @@ datasources:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     dialect: POSTGRES
-    schema: enquiry_handler
+    schema: site_controller
   reigatejuniorjoggers:
     url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/reigatejuniorjoggers?timezone=UTC
     driverClassName: org.postgresql.Driver
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     dialect: POSTGRES
-    schema: enquiry_handler
+    schema: site_controller
 
 jpa:
   default:
@@ -60,3 +60,10 @@ jpa:
 jackson:
   serialization:
     WRITE_DATES_AS_TIMESTAMPS: false
+
+flyway:
+  datasources:
+    default:
+      locations: classpath:databasemigrations
+    reigatejuniorjoggers:
+      locations: classpath:databasemigrations

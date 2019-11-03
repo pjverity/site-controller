@@ -3,15 +3,13 @@ kind: Deployment
 metadata:
   labels:
     app: site-controller
-    env: uat
-  name: uat-site-controller
-  namespace: default
+  name: site-controller
+  namespace: uat
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: site-controller
-      env: uat
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -21,14 +19,13 @@ spec:
     metadata:
       labels:
         app: site-controller
-        env: uat
     spec:
       containers:
         - env:
           - name: JAVA_OPTS
             value: -XX:MaxRAMPercentage=80
           - name: DATABASE_SERVICE
-            value: uat-postgres
+            value: postgres
           - name: DATABASE_USERNAME
             valueFrom:
               secretKeyRef:

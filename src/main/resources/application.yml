@@ -1,15 +1,12 @@
 micronaut:
   application:
     name: site-controller
-#  server:
-#    port: 8081
   executors:
     scheduled:
       type: scheduled
       core-pool-size: 1
 
   views:
-#    enabled: false
     folder: templates
     freemarker:
       enabled: false
@@ -32,14 +29,14 @@ datasources:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     dialect: POSTGRES
-    schema: enquiry_handler
+    schema: site_controller
   reigatejuniorjoggers:
     url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/reigatejuniorjoggers?timezone=UTC
     driverClassName: org.postgresql.Driver
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     dialect: POSTGRES
-    schema: enquiry_handler
+    schema: site_controller
 
 jpa:
   default:
@@ -60,3 +57,12 @@ jpa:
 jackson:
   serialization:
     WRITE_DATES_AS_TIMESTAMPS: false
+
+flyway:
+  datasources:
+    default:
+      schemas: site_controller
+      locations: classpath:databasemigrations
+    reigatejuniorjoggers:
+      schemas: site_controller
+      locations: classpath:databasemigrations

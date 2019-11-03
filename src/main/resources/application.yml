@@ -64,6 +64,8 @@ jackson:
 flyway:
   datasources:
     default:
+      schemas: site_controller
       locations: classpath:databasemigrations
     reigatejuniorjoggers:
+      schemas: site_controller
       locations: classpath:databasemigrations

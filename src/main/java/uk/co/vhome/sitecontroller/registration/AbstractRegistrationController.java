@@ -75,7 +75,7 @@ abstract class AbstractRegistrationController
 		 confirmationModel.putAll(additionalConfirmationModel);
 	}
 
-	@Post(value = "/register/{emailAddress}", consumes = {"application/x-www-form-urlencoded"})
+	@Post(value = "/register/{emailAddress}", consumes = {"application/json"})
 	Single<HttpResponse> register(@Email String emailAddress, @Valid @Body UserDetail user, @QueryValue(defaultValue = "false") boolean isSmokeTest)
 	{
 		return Single.create(emitter -> processRegistration(emitter, emailAddress, user, isSmokeTest));

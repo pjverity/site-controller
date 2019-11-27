@@ -48,6 +48,14 @@ spec:
                 name: mail-credentials
           image: gcr.io/clubbed-197021/site-controller:latest
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /health
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /health
           name: site-controller
           ports:
             - containerPort: 8080

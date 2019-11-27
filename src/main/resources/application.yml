@@ -5,11 +5,16 @@ micronaut:
     scheduled:
       type: scheduled
       core-pool-size: 1
-
   views:
     folder: templates
     freemarker:
       enabled: false
+
+endpoints:
+  all:
+    enabled: false
+  health:
+    enabled: true
 
 mail:
   smtp:

@@ -55,10 +55,12 @@ spec:
             httpGet:
               port: 8080
               path: /health
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               port: 8080
               path: /health
+            initialDelaySeconds: 60
           name: site-controller
           ports:
             - containerPort: 8080

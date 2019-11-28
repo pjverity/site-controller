@@ -21,8 +21,7 @@ mail:
     host: server.v-home.co.uk
     localhost: server.v-home.co.uk
     port: 587
-    auth:
-      mechanisms: DIGEST-MD5
+    auth: true
     starttls:
       enable: true
       required: true

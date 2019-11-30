@@ -56,11 +56,13 @@ spec:
               port: 8080
               path: /health
             initialDelaySeconds: 60
+            timeoutSeconds: 5
           readinessProbe:
             httpGet:
               port: 8080
               path: /health
             initialDelaySeconds: 60
+            timeoutSeconds: 5
           name: site-controller
           ports:
             - containerPort: 8080

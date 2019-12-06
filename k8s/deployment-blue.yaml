@@ -51,6 +51,18 @@ spec:
                 name: mail-credentials
           image: gcr.io/clubbed-197021/site-controller:1.2.2
           imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /health
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /health
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
           name: site-controller
           ports:
             - containerPort: 8080
@@ -58,8 +70,8 @@ spec:
           resources:
             limits:
               cpu: 150m
-              memory: 250Mi
+              memory: 280Mi
             requests:
               cpu: 3m
-              memory: 180Mi
+              memory: 200Mi
       restartPolicy: Always

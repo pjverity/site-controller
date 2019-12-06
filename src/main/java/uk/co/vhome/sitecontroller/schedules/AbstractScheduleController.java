@@ -14,12 +14,15 @@ import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.Map;
 
 public abstract class AbstractScheduleController<T extends BaseScheduleRepository>
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractScheduleController.class);
-	
+
+	private static final Comparator<Schedule> WEEKDAY_SCHEDULE_COMPARATOR = Comparator.comparingInt(schedule -> schedule.getCommences().getDayOfWeek().getValue());
+
 	private final T scheduleRepository;
 
 	protected AbstractScheduleController(T scheduleRepository)
@@ -35,7 +38,11 @@ public abstract class AbstractScheduleController<T extends BaseScheduleRepositor
 			return HttpResponse.ok(Flowable.fromIterable(scheduleRepository.findAll()));
 		}
 
-		return HttpResponse.ok(Flowable.fromIterable(scheduleRepository.findAllByActiveTrueOrderByCommencesDescTimeDesc()));
+		var allByActiveTrue = scheduleRepository.findAllByActiveTrue();
+
+		allByActiveTrue.sort(WEEKDAY_SCHEDULE_COMPARATOR);
+
+		return HttpResponse.ok(Flowable.fromIterable(allByActiveTrue));
 	}
 
 	@Post

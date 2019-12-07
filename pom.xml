@@ -4,18 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.vhome</groupId>
 	<artifactId>site-controller</artifactId>
-	<version>1.3.0</version>
+	<version>1.4.0</version>
 	<properties>
-		<micronaut.version>1.2.5</micronaut.version>
+		<micronaut.version>1.2.7</micronaut.version>
 		<jdk.version>13</jdk.version>
 		<maven.compiler.target>${jdk.version}</maven.compiler.target>
 		<maven.compiler.source>${jdk.version}</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<exec.mainClass>uk.co.vhome.sitecontroller.SiteControllerApplication</exec.mainClass>
-		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-		<micronaut-data.version>1.0.0.M4</micronaut-data.version>
+		<maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>
+		<micronaut-data.version>1.0.0.M5</micronaut-data.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -68,6 +68,10 @@
 			<groupId>io.micronaut</groupId>
 			<artifactId>micronaut-http-client</artifactId>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.micronaut</groupId>
+			<artifactId>micronaut-management</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.micronaut.data</groupId>

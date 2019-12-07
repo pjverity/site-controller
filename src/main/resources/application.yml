@@ -5,19 +5,23 @@ micronaut:
     scheduled:
       type: scheduled
       core-pool-size: 1
-
   views:
     folder: templates
     freemarker:
       enabled: false
+
+endpoints:
+  all:
+    enabled: false
+  health:
+    enabled: true
 
 mail:
   smtp:
     host: server.v-home.co.uk
     localhost: server.v-home.co.uk
     port: 587
-    auth:
-      mechanisms: DIGEST-MD5
+    auth: true
     starttls:
       enable: true
       required: true
